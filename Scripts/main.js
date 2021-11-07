@@ -13,6 +13,9 @@ const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 
+//creating text
+
+
 camera.position.z = 5;
 
 const space = new THREE.Group();
@@ -51,13 +54,14 @@ function buildSpace(n){
 	}
 }
 
+
 //number of stars
 const stars = 5000;
 
 buildSpace(stars);
 scene.add(space);
 //switch to true for animation
-var jump = true;
+var jump = false;
 
 //Need to put my name somewhere
 //Add a button to activate the effect
