@@ -1,3 +1,5 @@
+//WHY WONT YOU WORK!!!! import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 //creates scene and camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -59,6 +61,10 @@ buildSpace(stars);
 scene.add(space);
 
 //creating my name
+// const loader = new GLTFLoader();
+//AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+// const loadedData = await loader.loadAsync('pumpkin.gltf');
+
 const nameGeom = new THREE.BoxGeometry();
 const nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
 const nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
@@ -79,13 +85,13 @@ const animate = function () {
 	if(jump == true){
 		//animates every object in space
 		for (var i = 0; i <= stars; i++){
-			space.children[i].scale.z += 0.01;
-			space.children[i].position.z += 0.01;
+			space.children[i].scale.z += 0.1;
+			space.children[i].position.z += 0.1;
 		}
 	}
 
-	nameMesh.rotation.x += 0.1;
-	nameMesh.rotation.z += 0.1;
+	nameMesh.rotation.x += 0.01;
+	nameMesh.rotation.z += 0.01;
 	
 	//Makes the cube stretch on Z-Axis
 	// if(group.scale.z <= 20){
