@@ -13,9 +13,6 @@ const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 
-//creating text
-
-
 camera.position.z = 5;
 
 const space = new THREE.Group();
@@ -60,6 +57,13 @@ const stars = 5000;
 
 buildSpace(stars);
 scene.add(space);
+
+//creating my name
+const nameGeom = new THREE.BoxGeometry();
+const nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
+const nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
+scene.add(nameMesh);
+
 //switch to true for animation
 var jump = false;
 
@@ -75,10 +79,13 @@ const animate = function () {
 	if(jump == true){
 		//animates every object in space
 		for (var i = 0; i <= stars; i++){
-			space.children[i].scale.z += 0.1;
-			space.children[i].position.z += 0.7;
+			space.children[i].scale.z += 0.01;
+			space.children[i].position.z += 0.01;
 		}
 	}
+
+	nameMesh.rotation.x += 0.1;
+	nameMesh.rotation.z += 0.1;
 	
 	//Makes the cube stretch on Z-Axis
 	// if(group.scale.z <= 20){
