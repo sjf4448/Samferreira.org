@@ -1,4 +1,6 @@
-//WHY WONT YOU WORK!!!! import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from 'https://cdn.skypack.dev/three@0.134.0'
+import {TextGeometry} from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/geometries/TextGeometry.js'
+import {FontLoader} from 'https://cdn.skypack.dev/three@0.134.0/examples/jsm/loaders/FontLoader'
 
 //creates scene and camera
 const scene = new THREE.Scene();
@@ -10,10 +12,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-//idk why but when I delete this everything breaks
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
+
+
+
 
 camera.position.z = 5;
 
@@ -60,18 +61,73 @@ const stars = 5000;
 buildSpace(stars);
 scene.add(space);
 
+//mouse raycasting
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+function onMouseMove( event ) {
+
+	// calculate mouse position in normalized device coordinates
+	// (-1 to +1) for both components
+
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+}
+
+//animates things based on raycast aka mouse position
+function render() {
+
+	// update the picking ray with the camera and mouse position
+	raycaster.setFromCamera( mouse, camera );
+
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( scene.children );
+
+	//loop for hovering
+	for ( let i = 0; i < intersects.length; i ++ ) {
+
+		// intersects[ i ].object.material.color.set( 0xff0000 );
+
+	}
+
+	renderer.render( scene, camera );
+
+}
+
+window.addEventListener( 'mousemove', onMouseMove, false );
+
+
+
 //creating my name
 // const loader = new GLTFLoader();
 //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // const loadedData = await loader.loadAsync('pumpkin.gltf');
 
-const nameGeom = new THREE.BoxGeometry();
-const nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
-const nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
-scene.add(nameMesh);
+const loader = new FontLoader();
+var nameMesh;
+loader.load( 'Fonts/Roboto_Bold.json', function (font){
+	const nameGeom = new TextGeometry( 'Sam', {
+		font: font,
+		size: 10,
+		height: 2,
+	} );
+
+	const nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
+	nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
+
+	scene.add(nameMesh);
+	nameMesh.position.x = -15;
+	nameMesh.position.y = -5;
+	nameMesh.position.z = -100;
+
+});
+
+
+
 
 //switch to true for animation
-var jump = false;
+var jump = true;
 
 //Need to put my name somewhere
 //Add a button to activate the effect
@@ -82,16 +138,24 @@ var jump = false;
 const animate = function () {
 	requestAnimationFrame( animate );
 
+	window.requestAnimationFrame(render);
+
 	if(jump == true){
+		nameMesh.scale.z += 0.01;
+		nameMesh.position.z += 0.1;
 		//animates every object in space
 		for (var i = 0; i <= stars; i++){
-			space.children[i].scale.z += 0.1;
+			space.children[i].scale.z += 0.01;
 			space.children[i].position.z += 0.1;
 		}
 	}
+	else{
+		nameMesh.rotation.x += 0.01;
+		nameMesh.rotation.z += 0.01;
+		
+	}
 
-	nameMesh.rotation.x += 0.01;
-	nameMesh.rotation.z += 0.01;
+
 	
 	//Makes the cube stretch on Z-Axis
 	// if(group.scale.z <= 20){
@@ -102,7 +166,7 @@ const animate = function () {
 	renderer.render( scene, camera );
 };
 
-animate();
+
 
 
 
@@ -118,3 +182,5 @@ window.onresize = function () {
 
 //hides srollbar
 document.body.style.overflow = 'hidden';
+
+animate();
