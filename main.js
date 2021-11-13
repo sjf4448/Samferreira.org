@@ -104,30 +104,42 @@ window.addEventListener( 'mousemove', onMouseMove, false );
 //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // const loadedData = await loader.loadAsync('pumpkin.gltf');
 
-const loader = new FontLoader();
-var nameMesh;
-loader.load( 'Fonts/Roboto_Bold.json', function (font){
-	const nameGeom = new TextGeometry( 'Sam', {
+const Text = new THREE.Group;
+
+
+
+export function newText(text, fontsrc, size, height, posx, posy, posz, group){
+	var loader = new FontLoader();
+	var nameMesh;
+	loader.load( fontsrc, function (font){
+	var nameGeom = new TextGeometry( text, {
 		font: font,
-		size: 10,
-		height: 2,
+		size: size,
+		height: height,
 	} );
 
-	const nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
+	var nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
 	nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
 
-	scene.add(nameMesh);
-	nameMesh.position.x = -15;
-	nameMesh.position.y = -5;
-	nameMesh.position.z = -100;
+	
+	nameMesh.position.x = posx;
+	nameMesh.position.y = posy;
+	nameMesh.position.z = posz;
+
+	group.add(nameMesh);
 
 });
+}
+
+//creates text that says "Sam" in Text group @ index 0
+newText('Sam', './Fonts/Roboto_Bold.json', 10, 2, -15, -5, -100, Text);
+scene.add(Text);
 
 
 
 
 //switch to true for animation
-var jump = true;
+var jump = false;
 
 //Need to put my name somewhere
 //Add a button to activate the effect
@@ -141,8 +153,8 @@ const animate = function () {
 	window.requestAnimationFrame(render);
 
 	if(jump == true){
-		nameMesh.scale.z += 0.01;
-		nameMesh.position.z += 0.1;
+
+		
 		//animates every object in space
 		for (var i = 0; i <= stars; i++){
 			space.children[i].scale.z += 0.01;
@@ -150,8 +162,7 @@ const animate = function () {
 		}
 	}
 	else{
-		nameMesh.rotation.x += 0.01;
-		nameMesh.rotation.z += 0.01;
+		Text.children[0].position.z += 0.1;
 		
 	}
 
