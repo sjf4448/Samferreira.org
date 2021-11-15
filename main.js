@@ -133,11 +133,11 @@ export function newText(text, fontsrc, size, height, posx, posy, posz, group){
 
 //creates text that says "Sam" in Text group @ index 0
 //fix so it returns the index
-newText('Sam', './Fonts/Roboto_Bold.json', 10, 2, -15, -5, -100, Text);
+newText('Sam', './Fonts/Roboto_Bold.json', 10, 2, -13, -5, -100, Text);
+
+newText('Click to enter', './Fonts/Roboto_Bold.json', 10, 2, -40, -25, -100, Text);
+
 scene.add(Text);
-
-
-
 
 //switch to true for animation
 var jump = false;
@@ -157,9 +157,11 @@ const animate = function () {
 
 		
 		//animates every object in space
+		
 		for (var i = 0; i <= stars; i++){
-			space.children[i].scale.z += 0.01;
-			space.children[i].position.z += 0.1;
+			space.children[i].scale.z += 0.05;
+			space.children[i].position.z += 0.5;
+			
 		}
 	}
 	else{
