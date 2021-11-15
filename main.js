@@ -12,11 +12,33 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+var depth = 5
+camera.position.z = depth;
+
+
+//DIDNT MAKE THIS BUT ITS USEFUL AF
+const visibleHeightAtZDepth = ( depth, camera ) => {
+	// compensate for cameras not positioned at z=0
+	const cameraOffset = camera.position.z;
+	if ( depth < cameraOffset ) depth -= cameraOffset;
+	else depth += cameraOffset;
+  
+	// vertical fov in radians
+	const vFOV = camera.fov * Math.PI / 180; 
+  
+	// Math.abs to ensure the result is always positive
+	return 2 * Math.tan( vFOV / 2 ) * Math.abs( depth );
+  };
+  
+  const visibleWidthAtZDepth = ( depth, camera ) => {
+	const height = visibleHeightAtZDepth( depth, camera );
+	return height * camera.aspect;
+  };
 
 
 
 
-camera.position.z = 5;
+
 
 const space = new THREE.Group();
 
@@ -50,52 +72,55 @@ function getRandomArbitrary(min, max) {
 
 function buildSpace(n){
 	for(var i = 0; i <= n; i++){
-		makeStar(getRandomArbitrary(-1000, 1000), getRandomArbitrary(-1000, 1000), getRandomArbitrary(-1000, 10));
+		var z = getRandomArbitrary(-1000, 10);
+		var x = getRandomArbitrary(visibleWidthAtZDepth(z, camera)/2 * -1 - 20, visibleWidthAtZDepth(z, camera)/2 + 20);
+		var y = getRandomArbitrary(visibleHeightAtZDepth(z, camera)/2 * -1 - 20, visibleHeightAtZDepth(z, camera)/2 + 20);
+		makeStar(x, y, z - 10);
 	}
 }
 
 
 //number of stars
-const stars = 5000;
+const stars = 1000;
 
 buildSpace(stars);
 scene.add(space);
 
-//mouse raycasting
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
+////Raycasting and mouse stuff
+// //mouse raycasting
+// const raycaster = new THREE.Raycaster();
+// const mouse = new THREE.Vector2();
 
-function onMouseMove( event ) {
+// function onMouseMove( event ) {
 
-	// calculate mouse position in normalized device coordinates
-	// (-1 to +1) for both components
+// 	// calculate mouse position in normalized device coordinates
+// 	// (-1 to +1) for both components
 
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+// 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+// 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-}
+// }
 
-//animates things based on raycast aka mouse position
-function render() {
+// //animates things based on raycast aka mouse position
+// function render() {
 
-	// update the picking ray with the camera and mouse position
-	raycaster.setFromCamera( mouse, camera );
+// 	// update the picking ray with the camera and mouse position
+// 	raycaster.setFromCamera( mouse, camera );
 
-	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( scene.children );
+// 	// calculate objects intersecting the picking ray
+// 	const intersects = raycaster.intersectObjects( scene.children );
 
-	//loop for hovering
-	for ( let i = 0; i < intersects.length; i ++ ) {
+// 	//loop for hovering
+// 	for ( let i = 0; i < intersects.length; i ++ ) {
+// 			//intersects[ i ].object.material.color.set( 0xff0000 );
 
-		// intersects[ i ].object.material.color.set( 0xff0000 );
+// 	}
 
-	}
+// 	renderer.render( scene, camera );
 
-	renderer.render( scene, camera );
+// }
 
-}
-
-window.addEventListener( 'mousemove', onMouseMove, false );
+// window.addEventListener( 'mousemove', onMouseMove, false );
 
 
 
@@ -147,25 +172,28 @@ var jump = false;
 //Planets for portfolio pages?
 //Goal: Star wars space jump effect
 
+document.onclick= function(event){
+	jump = true;
+}
+
 //infinte animation loop
 const animate = function () {
 	requestAnimationFrame( animate );
 
-	window.requestAnimationFrame(render);
 
 	if(jump == true){
-
-		
 		//animates every object in space
+		Text.clear();
 		
 		for (var i = 0; i <= stars; i++){
-			space.children[i].scale.z += 0.05;
-			space.children[i].position.z += 0.5;
-			
+			if(space.children[i].scale.z < 100){
+				space.children[i].scale.z += 0.6;
+			}
+			space.children[i].position.z += 2.3;
 		}
 	}
 	else{
-		Text.children[0].position.z += 0.1;
+		//Text.children[0].position.z += 0.1;
 		
 	}
 
