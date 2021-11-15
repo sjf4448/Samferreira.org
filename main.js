@@ -132,6 +132,7 @@ export function newText(text, fontsrc, size, height, posx, posy, posz, group){
 }
 
 //creates text that says "Sam" in Text group @ index 0
+//fix so it returns the index
 newText('Sam', './Fonts/Roboto_Bold.json', 10, 2, -15, -5, -100, Text);
 scene.add(Text);
 
