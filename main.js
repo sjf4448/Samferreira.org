@@ -72,7 +72,7 @@ function getRandomArbitrary(min, max) {
 
 function buildSpace(n){
 	for(var i = 0; i <= n; i++){
-		var z = getRandomArbitrary(-1000, 10);
+		var z = getRandomArbitrary(-1000, -75);
 		var x = getRandomArbitrary(visibleWidthAtZDepth(z, camera)/2 * -1 - 20, visibleWidthAtZDepth(z, camera)/2 + 20);
 		var y = getRandomArbitrary(visibleHeightAtZDepth(z, camera)/2 * -1 - 20, visibleHeightAtZDepth(z, camera)/2 + 20);
 		makeStar(x, y, z - 10);
@@ -145,6 +145,7 @@ export function newText(text, fontsrc, size, height, posx, posy, posz, group){
 
 	var nameMaterial = new THREE.MeshBasicMaterial(({ color: 0xffffff }))
 	nameMesh = new THREE.Mesh(nameGeom, nameMaterial);
+	
 
 	
 	nameMesh.position.x = posx;
@@ -193,16 +194,13 @@ const animate = function () {
 		}
 	}
 	else{
-		//Text.children[0].position.z += 0.1;
+		//Text.children[0].rotation.z += 0.01;
 		
 	}
 
 
 	
-	//Makes the cube stretch on Z-Axis
-	// if(group.scale.z <= 20){
-	// 	group.scale.setZ(group.scale.z + 0.5);
-	// }
+
 	
 
 	renderer.render( scene, camera );
