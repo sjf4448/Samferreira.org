@@ -81,7 +81,7 @@ function buildSpace(n){
 
 
 //number of stars
-const stars = 1000;
+const stars = camera.aspect * 300;
 
 buildSpace(stars);
 scene.add(space);
@@ -217,6 +217,9 @@ window.onresize = function () {
   camera.updateProjectionMatrix();
 
   renderer.setSize( window.innerWidth, window.innerHeight );
+
+  space.clear();
+  buildSpace(stars);
 
 };
 
