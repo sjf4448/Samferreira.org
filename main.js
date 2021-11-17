@@ -161,7 +161,7 @@ export function newText(text, fontsrc, size, height, posx, posy, posz, group){
 //fix so it returns the index
 newText('Sam', './Fonts/Roboto_Bold.json', 10, 2, -13, -5, -100, Text);
 
-newText('Click to enter', './Fonts/Roboto_Bold.json', 10, 2, -40, -25, -100, Text);
+newText('Click to enter', './Fonts/Roboto_Bold.json', 6, 2, -24, -20, -100, Text);
 
 scene.add(Text);
 
@@ -194,7 +194,7 @@ const animate = function () {
 		}
 	}
 	else{
-		//Text.children[0].rotation.z += 0.01;
+		Text.children[0].rotation.y += 0.01;
 		
 	}
 
