@@ -190,11 +190,11 @@ const animate = function () {
 			if(space.children[i].scale.z < 100){
 				space.children[i].scale.z += 0.6;
 			}
-			//space.children[i].position.z += 2.3;
+			space.children[i].position.z += 2.3;
 		}
 	}
 	else{
-		Text.children[0].rotation.y += 0.01;
+		//Text.children[0].rotation.y += 0.01;
 		
 	}
 
