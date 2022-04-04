@@ -190,7 +190,7 @@ const animate = function () {
 			if(space.children[i].scale.z < 100){
 				space.children[i].scale.z += 0.6;
 			}
-			space.children[i].position.z += 2.3;
+			//space.children[i].position.z += 2.3;
 		}
 	}
 	else{
