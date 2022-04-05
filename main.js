@@ -16,7 +16,7 @@ var depth = 5
 camera.position.z = depth;
 
 
-//DIDNT MAKE THIS BUT ITS USEFUL AF
+//DIDNT MAKE THIS BUT ITS USEFUL
 const visibleHeightAtZDepth = ( depth, camera ) => {
 	// compensate for cameras not positioned at z=0
 	const cameraOffset = camera.position.z;
