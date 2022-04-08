@@ -62,17 +62,17 @@ function inputs(){
 
 //draws the character
 function drawGreenBlob(){
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "green";
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2)
     ctx.fill();
 }
 
 function drawScore(){
-    ctx.fillStyle = "green";
-    ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2)
-    ctx.fill();
+    ctx.fillStyle = "blue";
+    ctx.font = "30px Arial";
+    ctx.fillText("Hello World", 10, 50);
+
 }
 
 //reseets game screen
