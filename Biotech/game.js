@@ -140,16 +140,29 @@ function keyUp(event) {
     }
 }
 
-//does not work yet
+//does not work yet; attempting to generatePellet data to be drawn over background in clearScreen;
 function loadPellets(){
     for(let i = 0; i <= 10; i++){
-        let pHeight = Math.random() * 800
-        let pWidth = Math.random() * 800
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        ctx.arc(pHeight, pWidth, 10, 0, Math.PI * 2)
-        ctx.fill();
-    }  
+        let pelletArray = [];
+        let pHeight = Math.random() * 600;
+        let pWidth = Math.random() * 800;
+        let color = "white";
+        let radius = 10;
+        let startAngle = 0;
+        let endAngle = Math.PI * 2;
+
+
+        let Pellet[i] = {width = pWidth, height = pHeight, fillstyle = color, r = radius, sA = startAngle, eA = endAngle};
+    }
+}
+
+//dunction that draws the pellets to the screen
+//does not work; need to make an array that holds each pellet's data
+function drawPellets(){
+    ctx.fillStyle = fillstyle;
+    ctx.beginPath();
+    ctx.arc(width, height, r, sA, eA);
+    ctx.fill();
 }
 
 //interval set to 60 times per second in order to ensure no differnce between computers
