@@ -18,12 +18,9 @@ function drawGame(){
     inputs();
     boundryCheck();
     drawGreenBlob();
-    //score();
+    drawScore();
 }
 
-// function score(){
-//     //fillText('score: ', 0, 0);
-// }
 
 function boundryCheck(){
     //top bound
@@ -65,6 +62,13 @@ function inputs(){
 
 //draws the character
 function drawGreenBlob(){
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2)
+    ctx.fill();
+}
+
+function drawScore(){
     ctx.fillStyle = "green";
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2)
