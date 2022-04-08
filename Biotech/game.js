@@ -32,25 +32,21 @@ function boundryCheck(){
     //top bound
     if(y < radius) {
         y = radius;
-        return true;
     }
 
     //bottom bound
     if (y > canvas.height - radius) {
         y = canvas.height - radius;
-        return true;
     }
 
     //left bound
     if(x < radius) {
         x = radius;
-        return true;
     }
 
     //right bound
     if (x > canvas.width - radius) {
         x = canvas.width - radius;
-        return true;
     }
 }
 
