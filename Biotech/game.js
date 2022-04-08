@@ -48,7 +48,7 @@ function boundryCheck(){
     }
 
     else{
-        score += 1;
+        //score += 1;
     }
 }
 
@@ -139,5 +139,15 @@ function keyUp(event) {
     }
 }
 
+function drawPellets(){
+    for(let i = 0; i <= 10; i++){
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(Math.random() * 800, Math.random() * 800, 10, 0, Math.PI * 2)
+        ctx.fill();
+    }  
+}
+
 //interval set to 60 times per second in order to ensure no differnce between computers
 setInterval(drawGame, 1000/60);
+drawPellets();
