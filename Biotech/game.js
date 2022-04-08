@@ -26,21 +26,29 @@ function boundryCheck(){
     //top bound
     if(y < radius) {
         y = radius;
+        score -= 1;
     }
 
     //bottom bound
     if (y > canvas.height - radius) {
         y = canvas.height - radius;
+        score -= 1;
     }
 
     //left bound
     if(x < radius) {
         x = radius;
+        score -= 1;
     }
 
     //right bound
     if (x > canvas.width - radius) {
         x = canvas.width - radius;
+        score -= 1;
+    }
+
+    else{
+        score += 1;
     }
 }
 
@@ -73,7 +81,6 @@ function drawScore(){
     ctx.fillStyle = "blue";
     ctx.font = "30px Arial";
     ctx.fillText("Score: " + score, 10, 50);
-
 }
 
 //reseets game screen
