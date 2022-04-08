@@ -5,6 +5,7 @@ let x = 100;
 let y = 100;
 let radius = 50;
 let speed = 10;
+let score = 0;
 
 let downPressed = false;
 let upPressed = false;
@@ -17,27 +18,39 @@ function drawGame(){
     inputs();
     boundryCheck();
     drawGreenBlob();
+    score();
+}
+
+function score(){
+    fillText('score: ', 0, 0);
+    if(!boundryCheck){
+        score -= 1;
+    }
 }
 
 function boundryCheck(){
     //top bound
     if(y < radius) {
         y = radius;
+        return true;
     }
 
     //bottom bound
     if (y > canvas.height - radius) {
         y = canvas.height - radius;
+        return true;
     }
 
     //left bound
     if(x < radius) {
         x = radius;
+        return true;
     }
 
     //right bound
     if (x > canvas.width - radius) {
         x = canvas.width - radius;
+        return true;
     }
 }
 
