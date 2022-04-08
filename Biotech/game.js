@@ -18,12 +18,12 @@ function drawGame(){
     inputs();
     boundryCheck();
     drawGreenBlob();
-    score();
+    //score();
 }
 
-function score(){
-    //fillText('score: ', 0, 0);
-}
+// function score(){
+//     //fillText('score: ', 0, 0);
+// }
 
 function boundryCheck(){
     //top bound
