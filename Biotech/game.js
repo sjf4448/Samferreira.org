@@ -23,9 +23,6 @@ function drawGame(){
 
 function score(){
     fillText('score: ', 0, 0);
-    if(!boundryCheck){
-        score -= 1;
-    }
 }
 
 function boundryCheck(){
