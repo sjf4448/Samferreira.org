@@ -140,14 +140,18 @@ function keyUp(event) {
     }
 }
 
-function drawPellets(){
+//does not work yet
+function loadPellets(){
     for(let i = 0; i <= 10; i++){
+        let pHeight = Math.random() * 800
+        let pWidth = Math.random() * 800
         ctx.fillStyle = "white";
         ctx.beginPath();
-        ctx.arc(Math.random() * 800, Math.random() * 800, 10, 0, Math.PI * 2)
+        ctx.arc(pHeight, pWidth, 10, 0, Math.PI * 2)
         ctx.fill();
     }  
 }
 
 //interval set to 60 times per second in order to ensure no differnce between computers
 setInterval(drawGame, 1000/60);
+loadPellets();
