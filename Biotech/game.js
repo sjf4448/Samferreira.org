@@ -87,6 +87,7 @@ function drawScore(){
 function clearScreen() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
+    drawPellets();
 }
 
 document.body.addEventListener('keydown', keyDown);
@@ -150,4 +151,3 @@ function drawPellets(){
 
 //interval set to 60 times per second in order to ensure no differnce between computers
 setInterval(drawGame, 1000/60);
-drawPellets();
