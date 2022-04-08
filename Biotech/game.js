@@ -22,7 +22,7 @@ function drawGame(){
 }
 
 function score(){
-    fillText('score: ', 0, 0);
+    //fillText('score: ', 0, 0);
 }
 
 function boundryCheck(){
