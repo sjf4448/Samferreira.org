@@ -68,10 +68,11 @@ function drawGreenBlob(){
     ctx.fill();
 }
 
+//draws and updates the score
 function drawScore(){
     ctx.fillStyle = "blue";
     ctx.font = "30px Arial";
-    ctx.fillText("Hello World", 10, 50);
+    ctx.fillText("Score: " + score, 10, 50);
 
 }
 
