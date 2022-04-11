@@ -1,11 +1,17 @@
 const canvas = document.getElementById("gameArea");
 const ctx = canvas.getContext('2d');
 
-let x = 100;
-let y = 100;
 let radius = 50;
+let x = canvas.width;
+let y = canvas.height;
 let speed = 10;
 let score = 0;
+let gameOver = false;
+
+let pR = 10;
+let pX = 0;
+let pY = 0;
+let pSpeed = 1;
 
 let downPressed = false;
 let upPressed = false;
@@ -14,11 +20,17 @@ let rightPressed = false;
 
 //Game Loop
 function drawGame(){
-    clearScreen();
-    inputs();
-    boundryCheck();
-    drawGreenBlob();
-    drawScore();
+    if (!gameOver){
+        clearScreen();
+        inputs();
+        boundryCheck();
+        drawGreenBlob();
+        drawScore();
+        score += 1/60;
+    }
+    else{
+        gameOverScreen();
+    }
 }
 
 
@@ -26,29 +38,21 @@ function boundryCheck(){
     //top bound
     if(y < radius) {
         y = radius;
-        score -= 1;
     }
 
     //bottom bound
     if (y > canvas.height - radius) {
         y = canvas.height - radius;
-        score -= 1;
     }
 
     //left bound
     if(x < radius) {
         x = radius;
-        score -= 1;
     }
 
     //right bound
     if (x > canvas.width - radius) {
         x = canvas.width - radius;
-        score -= 1;
-    }
-
-    else{
-        //score += 1;
     }
 }
 
@@ -80,14 +84,27 @@ function drawGreenBlob(){
 function drawScore(){
     ctx.fillStyle = "blue";
     ctx.font = "30px Arial";
-    ctx.fillText("Score: " + score, 10, 50);
+    ctx.fillText("Score: " + parseInt(score), 10, 50);
+
+    if (pX <= x + radius && pX >= x - radius && pY <= y + radius && pY >= y - radius){
+        gameOver = true;
+    }
 }
 
-//reseets game screen
+//resets game screen
 function clearScreen() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
     drawPellets();
+}
+
+//resets game screen
+function gameOverScreen() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.height)
+    ctx.fillStyle = "blue";
+    ctx.font = "30px Arial";
+    ctx.fillText("Score: " + parseInt(score), canvas.clientWidth / 2 - 50, canvas.height / 2);
 }
 
 document.body.addEventListener('keydown', keyDown);
@@ -140,31 +157,39 @@ function keyUp(event) {
     }
 }
 
-//does not work yet; attempting to generatePellet data to be drawn over background in clearScreen;
-function loadPellets(){
-    for(let i = 0; i <= 10; i++){
-        let pelletArray = [];
-        let pHeight = Math.random() * 600;
-        let pWidth = Math.random() * 800;
-        let color = "white";
-        let radius = 10;
-        let startAngle = 0;
-        let endAngle = Math.PI * 2;
-
-
-        let Pellet[i] = {width = pWidth, height = pHeight, fillstyle = color, r = radius, sA = startAngle, eA = endAngle};
-    }
-}
-
 //dunction that draws the pellets to the screen
 //does not work; need to make an array that holds each pellet's data
 function drawPellets(){
-    ctx.fillStyle = fillstyle;
-    ctx.beginPath();
-    ctx.arc(width, height, r, sA, eA);
-    ctx.fill();
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(pX + pR, pY + pR, pR, 0, Math.PI * 2);
+        ctx.fill();
+
+
+        //modifications are here for some reason idk why
+        if (score <= 50){
+            pSpeed = score / 10 + 1;
+        }
+
+        if (score >= 80 && score <= 110){
+            speed -= .1/60
+        }
+        
+
+        if(pX > x){
+            pX -= pSpeed;
+        }
+        else{
+            pX += pSpeed;
+        }
+
+        if(pY > y){
+            pY -= pSpeed;
+        }
+        else{
+            pY += pSpeed;
+        }
 }
 
 //interval set to 60 times per second in order to ensure no differnce between computers
 setInterval(drawGame, 1000/60);
-loadPellets();
