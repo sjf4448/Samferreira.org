@@ -2,11 +2,12 @@ const canvas = document.getElementById("gameArea");
 const ctx = canvas.getContext('2d');
 
 let radius = 50;
-let x = canvas.width;
-let y = canvas.height;
+let x = canvas.width - 10;
+let y = canvas.height - 10;
 let speed = 10;
 let score = 0;
 let gameOver = false;
+let gameStart = false;
 
 let pR = 10;
 let pX = 0;
@@ -17,16 +18,22 @@ let downPressed = false;
 let upPressed = false;
 let leftPressed = false;
 let rightPressed = false;
+let mousePressed = false;
 
 //Game Loop
 function drawGame(){
-    if (!gameOver){
+    if (!gameOver && gameStart){
         clearScreen();
         inputs();
         boundryCheck();
         drawGreenBlob();
         drawScore();
         score += 1/60;
+    }
+    else if(!gameStart){
+        gameStartScreen();
+        //mouseDown();
+        inputs();
     }
     else{
         gameOverScreen();
@@ -105,6 +112,26 @@ function gameOverScreen() {
     ctx.fillStyle = "blue";
     ctx.font = "30px Arial";
     ctx.fillText("Score: " + parseInt(score), canvas.clientWidth / 2 - 50, canvas.height / 2);
+    ctx.fillText("complete the google form", canvas.clientWidth / 2 - 150, canvas.height / 2 + 40);
+}
+
+//document.body.addEventListener('mousedown', mouseDown);
+
+// function mouseDown(event){
+//     if(event.onmousedown){
+//         mousePressed = true;
+//     }
+// }
+
+function gameStartScreen() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.height)
+    ctx.fillStyle = "blue";
+    ctx.font = "30px Arial";
+    ctx.fillText("Listen to instructions", canvas.clientWidth / 2 - 150, canvas.height / 2);
+    if (x != canvas.width - 10 || y != canvas.height - 10){
+        gameStart = true;
+    }
 }
 
 document.body.addEventListener('keydown', keyDown);
