@@ -7,7 +7,7 @@ let y = canvas.height - 10;
 let speed = 10;
 let score = 0;
 let gameOver = false;
-let gameStart = false;
+let gameStart = true;
 
 let pR = 10;
 let pX = 0;
@@ -22,8 +22,12 @@ let mousePressed = false;
 
 //Game Loop
 function drawGame(){
+
+
+    // console.log ("player: " + x + "," + y + "    Enemy: " + pX + "," + pY) --> Prints enemy and player positions every frame only use for building training data
     if (!gameOver && gameStart){
         clearScreen();
+        AI();
         inputs();
         boundryCheck();
         drawGreenBlob();
@@ -220,3 +224,57 @@ function drawPellets(){
 
 //interval set to 60 times per second in order to ensure no differnce between computers
 setInterval(drawGame, 1000/60);
+
+
+//Tutorial --> https://scrimba.com/learn/neuralnetworks/working-with-objects-in-neural-networks-cd4awSM
+//Shoutout to this guy, more useful than anything else
+
+// RUNS THE FUNCTION MAKE SURE TO REMOVE
+//AI();
+
+
+function AI(){
+    // Input: postion of player, position of enemy
+    // Output: Win --> 0 = lose     1 = win
+    
+    const positions = [
+        {playerX: 750, PlayerY: 550, EnemyX: 700.5999999999989, EnemyY: 549.6699999999988},
+        {playerX: 750, PlayerY: 550, EnemyX: 1, EnemyY: 1},
+        {playerX: 750, PlayerY: 550, EnemyX: 375, EnemyY: 275},
+        {playerX: 1, PlayerY: 1, EnemyX: 1, EnemyY: 1},
+        {playerX: 375, PlayerY: 275, EnemyX: 375, EnemyY: 275},
+        {playerX: 210, PlayerY: 218, EnemyX: 210, EnemyY: 218}
+
+    ];
+    
+    const win = [
+        {win: 0},
+        {win: 1},
+        {win: 0.5},
+        {win: 0},
+        {win: 0},
+        {win: 0}
+    ];
+    
+    const trainingData = []
+    
+    for (let i = 0; i < positions.length; i++) {
+        trainingData.push({
+            input: positions[i],
+            output: win[i]
+        });
+    }
+    
+    // creates the actual neural net or something
+    const net = new brain.NeuralNetwork({ hiddenLayers: [3, 3, 3] });
+    
+    const stats = net.train(trainingData);
+    
+    net.train(trainingData);
+    
+    console.log(stats);
+    
+    console.log(net.run({
+        playerX: x, playerY: y, enemyX: pX, enemyY: pY
+    }));
+    }
