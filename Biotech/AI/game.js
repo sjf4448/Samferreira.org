@@ -243,7 +243,10 @@ function AI(){
         {playerX: 750, PlayerY: 550, EnemyX: 375, EnemyY: 275},
         {playerX: 1, PlayerY: 1, EnemyX: 1, EnemyY: 1},
         {playerX: 375, PlayerY: 275, EnemyX: 375, EnemyY: 275},
-        {playerX: 210, PlayerY: 218, EnemyX: 210, EnemyY: 218}
+        {playerX: 210, PlayerY: 218, EnemyX: 210, EnemyY: 218},
+        {playerX: 750, PlayerY: 550, EnemyX: 750, EnemyY: 1},
+        {playerX: 1, PlayerY: 550, EnemyX: 1, EnemyY: 1},
+        {playerX: 1, PlayerY: 1, EnemyX: 750, EnemyY: 550}
 
     ];
     
@@ -253,7 +256,10 @@ function AI(){
         {win: 0.5},
         {win: 0},
         {win: 0},
-        {win: 0}
+        {win: 0},
+        {win: 0.5},
+        {win: 0.5},
+        {win: 1}
     ];
     
     const trainingData = []
@@ -266,7 +272,8 @@ function AI(){
     }
     
     // creates the actual neural net or something
-    const net = new brain.NeuralNetwork({ hiddenLayers: [3, 3, 3] });
+    //const net = new brain.NeuralNetwork({ hiddenLayers: [5, 10, 20, 50, 20, 5, 3] }); final project Network
+    const net = new brain.NeuralNetwork({ hiddenLayers: [3] }); //Testing Network
     
     const stats = net.train(trainingData);
     
@@ -277,4 +284,26 @@ function AI(){
     console.log(net.run({
         playerX: x, playerY: y, enemyX: pX, enemyY: pY
     }));
+
+    if((net.run({
+        playerX: x, playerY: y, enemyX: pX, enemyY: pY
+    })) > 0.2){
+        var up = (net.run({playerX: x, playerY: y + speed, enemyX: pX, enemyY: pY}))
+        var down = (net.run({playerX: x, playerY: y - speed, enemyX: pX, enemyY: pY}))
+        var left = (net.run({playerX: x - speed, playerY: y, enemyX: pX, enemyY: pY}))
+        var right = (net.run({playerX: x + speed, playerY: y, enemyX: pX, enemyY: pY}))
+    }
+
+    if(up > down && up > left && up > right){
+        y = y + speed
+    }
+    else if(down > up && down > left && down > right){
+        y = y - speed
+    }
+    else if(left > up && left > down && left > right){
+        x = x - speed
+    }
+    else if(right > up && right > down && right > left){
+        x = x + speed
+    }
     }
