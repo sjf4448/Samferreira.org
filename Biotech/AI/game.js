@@ -21,7 +21,7 @@ let rightPressed = false;
 let mousePressed = false;
 
 //Game Loop
-console.log("start V.whatever.1")
+console.log("start V.whatever.2")
 function drawGame(){
 
 
@@ -34,6 +34,7 @@ function drawGame(){
         drawGreenBlob();
         drawScore();
         score += 1/60;
+
     }
     else if(!gameStart){
         gameStartScreen();
@@ -293,22 +294,23 @@ function AI(){
         var down = (net.run({playerX: x, playerY: y - speed, enemyX: pX, enemyY: pY}))
         var left = (net.run({playerX: x - speed, playerY: y, enemyX: pX, enemyY: pY}))
         var right = (net.run({playerX: x + speed, playerY: y, enemyX: pX, enemyY: pY}))
+        if(up > down && up > left && up > right){
+            y = y + speed
+            console.log("up")
+        }
+        else if(down > up && down > left && down > right){
+            y = y - speed
+            console.log("down")
+        }
+        else if(left > up && left > down && left > right){
+            x = x - speed
+            console.log("left")
+        }
+        else if(right > up && right > down && right > left){
+            x = x + speed
+            console.log("right")
+        }
     }
 
-    if(up > down && up > left && up > right){
-        y = y + speed
-        console.log("up")
-    }
-    else if(down > up && down > left && down > right){
-        y = y - speed
-        console.log("down")
-    }
-    else if(left > up && left > down && left > right){
-        x = x - speed
-        console.log("left")
-    }
-    else if(right > up && right > down && right > left){
-        x = x + speed
-        console.log("right")
-    }
+   
     }
