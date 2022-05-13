@@ -287,7 +287,7 @@ function AI(){
 
     if((net.run({
         playerX: x, playerY: y, enemyX: pX, enemyY: pY
-    })) > 0.2){
+    })) < 0.5){
         var up = (net.run({playerX: x, playerY: y + speed, enemyX: pX, enemyY: pY}))
         var down = (net.run({playerX: x, playerY: y - speed, enemyX: pX, enemyY: pY}))
         var left = (net.run({playerX: x - speed, playerY: y, enemyX: pX, enemyY: pY}))
