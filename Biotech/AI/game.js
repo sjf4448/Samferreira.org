@@ -21,6 +21,7 @@ let rightPressed = false;
 let mousePressed = false;
 
 //Game Loop
+console.log("start V.whatever.1")
 function drawGame(){
 
 
