@@ -253,15 +253,15 @@ function AI(){
     ];
     
     const win = [
-        {win: 0},
-        {win: 1},
-        {win: 0.5},
-        {win: 0},
-        {win: 0},
-        {win: 0},
-        {win: 0.5},
-        {win: 0.5},
-        {win: 1}
+        {win: [0]},
+        {win: [1]},
+        {win: [0.5]},
+        {win: [0]},
+        {win: [0]},
+        {win: [0]},
+        {win: [0.5]},
+        {win: [0.5]},
+        {win: [1]}
     ];
     
     const trainingData = []
@@ -275,7 +275,7 @@ function AI(){
     
     // creates the actual neural net or something
     //const net = new brain.NeuralNetwork({ hiddenLayers: [5, 10, 20, 50, 20, 5, 3] }); final project Network
-    const net = new brain.NeuralNetwork({ hiddenLayers: [3] }); //Testing Network
+    const net = new brain.NeuralNetwork({ hiddenLayers: [4, 1] }); //Testing Network
     
     const stats = net.train(trainingData);
     
@@ -283,10 +283,13 @@ function AI(){
     
     console.log(stats);
     
+
     console.log(net.run({
         playerX: x, playerY: y, enemyX: pX, enemyY: pY
     }));
 
+
+    //Problem --> net.run doesnt rturn a float, I don't know what it returns :(
     if((net.run({
         playerX: x, playerY: y, enemyX: pX, enemyY: pY
     })) < 0.5){
@@ -295,19 +298,19 @@ function AI(){
         var left = (net.run({playerX: x - speed, playerY: y, enemyX: pX, enemyY: pY}))
         var right = (net.run({playerX: x + speed, playerY: y, enemyX: pX, enemyY: pY}))
         if(up > down && up > left && up > right){
-            y = y + speed
+            y += speed
             console.log("up")
         }
         else if(down > up && down > left && down > right){
-            y = y - speed
+            y -= speed
             console.log("down")
         }
         else if(left > up && left > down && left > right){
-            x = x - speed
+            x -= speed
             console.log("left")
         }
         else if(right > up && right > down && right > left){
-            x = x + speed
+            x += speed
             console.log("right")
         }
     }
