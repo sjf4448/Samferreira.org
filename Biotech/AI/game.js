@@ -296,14 +296,18 @@ function AI(){
 
     if(up > down && up > left && up > right){
         y = y + speed
+        console.log("up")
     }
     else if(down > up && down > left && down > right){
         y = y - speed
+        console.log("down")
     }
     else if(left > up && left > down && left > right){
         x = x - speed
+        console.log("left")
     }
     else if(right > up && right > down && right > left){
         x = x + speed
+        console.log("right")
     }
     }
