@@ -21,7 +21,7 @@ let rightPressed = false;
 let mousePressed = false;
 
 //Game Loop
-console.log("start V.whatever.2")
+console.log("start V.whatever.3")
 function drawGame(){
 
 
@@ -274,8 +274,7 @@ function AI(){
     }
     
     // creates the actual neural net or something
-    //const net = new brain.NeuralNetwork({ hiddenLayers: [5, 10, 20, 50, 20, 5, 3] }); final project Network
-    const net = new brain.NeuralNetwork({ hiddenLayers: [4, 1] }); //Testing Network
+    const net = new brain.NeuralNetwork({ hiddenLayers: [4, 2] });
     
     const stats = net.train(trainingData);
     
