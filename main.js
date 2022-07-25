@@ -195,7 +195,7 @@ const animate = function () {
 		}
 
 		function myFunction(){
-			window.location.replace("samferreira.org/home");
+			window.location.replace("/home");
 		}
 
 	}
