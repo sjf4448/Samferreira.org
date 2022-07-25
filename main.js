@@ -185,6 +185,7 @@ const animate = function () {
 	if(jump == true){
 		//animates every object in space
 		Text.clear();
+		setTimeout(myFunction, 3000)
 		
 		for (var i = 0; i <= stars; i++){
 			if(space.children[i].scale.z < 100){
@@ -192,6 +193,11 @@ const animate = function () {
 			}
 			space.children[i].position.z += 2.3;
 		}
+
+		function myFunction(){
+			window.location.replace("samferreira.org/home");
+		}
+
 	}
 	else{
 		//Text.children[0].rotation.y += 0.01;
