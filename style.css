@@ -1,0 +1,73 @@
+body {
+    background-color: #5CDB95;
+    color: #EDF5E1;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+header {
+background-color: #8EE4AF;
+padding: 20px;
+text-align: left;
+display: flex;
+align-items: center;
+}
+
+header h1 {
+margin: 0;
+font-size: 36px;
+display:inline-block;
+}
+
+nav {
+background-color: #8EE4AF;
+padding: 10px;
+text-align: center;
+display:inline-block;
+margin-left: 20px;
+}
+
+nav a {
+color: #053868;
+text-decoration: none;
+margin: 0 10px;
+font-size: 18px;
+}
+
+section {
+padding: 20px;
+text-align: center;
+}
+
+section h2 {
+margin: 0;
+font-size: 24px;
+}
+
+section p {
+font-size: 18px;
+line-height: 1.5;
+}
+
+footer {
+background-color: #8EE4AF;
+padding: 10px;
+text-align: center;
+color: #053868;
+font-size: 14px;
+}
+
+.container {
+    display: flex; /* so the text and image containers will be in the same line */
+    align-items: center; /* center the text and image vertically */
+}
+.text-container {
+    width: 50%; /* adjust as needed to fit the text to the left of the image */
+    padding: 10px; /* add some padding for the text */
+    text-align: justify; /* align the text to the left */
+}
+.image-container {
+    width: 50%; /* adjust as needed to fit the image next to the text */
+    padding: 10px; /* add some padding for the image */
+}
