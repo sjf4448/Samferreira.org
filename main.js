@@ -185,7 +185,7 @@ const animate = function () {
 	if(jump == true){
 		//animates every object in space
 		Text.clear();
-		setTimeout(myFunction, 3000)
+		setTimeout(myFunction, 1000)
 		
 		for (var i = 0; i <= stars; i++){
 			if(space.children[i].scale.z < 100){
