@@ -1,27 +1,31 @@
 body {
-    background-color: #5CDB95;
-    color: #EDF5E1;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-}
-header {
-background-color: #8EE4AF;
-padding: 20px;
-text-align: left;
-display: flex;
-align-items: center;
+background-color: black;
+color: white;
+font-family: Arial, sans-serif;
+margin: 0;
+font-family: 'Avenir', sans-serif;
+padding: 0;
+font-size: 20px;
 }
 
-header h1 {
-margin: 0;
-font-size: 36px;
-display:inline-block;
+header {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background-color: black;
+color: #fff;
+padding: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid white;
+z-index: 1;
 }
 
 nav {
-background-color: #8EE4AF;
+z-index: 2;
+background-color: black;
 padding: 10px;
 text-align: center;
 display:inline-block;
@@ -29,20 +33,15 @@ margin-left: 20px;
 }
 
 nav a {
-color: #053868;
+color: white;
+align-items: center;
 text-decoration: none;
 margin: 0 10px;
-font-size: 18px;
+font-size: 15px;
 }
 
-section {
-padding: 20px;
-text-align: center;
-}
-
-section h2 {
-margin: 0;
-font-size: 24px;
+nav a img{
+    transform: translateY(+20%);
 }
 
 section p {
@@ -51,23 +50,39 @@ line-height: 1.5;
 }
 
 footer {
-background-color: #8EE4AF;
+background-color: black;
 padding: 10px;
 text-align: center;
-color: #053868;
+color: white;
 font-size: 14px;
+border-top: 1px solid white;
 }
 
+section {
+  padding: 20px;
+  height: 800px;
+  border-bottom: 1px dashed white;
+}
+
+
 .container {
-    display: flex; /* so the text and image containers will be in the same line */
-    align-items: center; /* center the text and image vertically */
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* header, main, footer */
+    min-height: 100vh;
 }
-.text-container {
-    width: 50%; /* adjust as needed to fit the text to the left of the image */
-    padding: 10px; /* add some padding for the text */
-    text-align: justify; /* align the text to the left */
-}
-.image-container {
-    width: 50%; /* adjust as needed to fit the image next to the text */
-    padding: 10px; /* add some padding for the image */
-}
+
+.name {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+  }
+  
+  .text {
+    font-size: 150px;
+    transform-style: preserve-3d;
+    transform: rotateX(45deg) rotateY(45deg);
+    font-family: 'Futura', sans-serif;
+  }
+  
