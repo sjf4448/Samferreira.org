@@ -49,6 +49,11 @@ font-size: 18px;
 line-height: 1.5;
 }
 
+section ul {
+  font-size: 18px;
+  line-height: 1.5;
+  }
+
 footer {
 background-color: black;
 padding: 10px;
@@ -84,5 +89,15 @@ section {
     transform-style: preserve-3d;
     transform: rotateX(45deg) rotateY(45deg);
     font-family: 'Futura', sans-serif;
+  }
+
+  /* Give the hidden class to anything you want to fade in */
+  .hidden{
+    opacity: 0;
+    transition: all 1s;
+  }
+  
+  .show{
+    opacity: 1;
   }
   
